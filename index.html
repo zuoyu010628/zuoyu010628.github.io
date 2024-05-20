@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta property="og:type" content="website">
@@ -171,7 +171,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-05-20 13:50:07 / 修改时间：13:53:30" itemprop="dateCreated datePublished" datetime="2024-05-20T13:50:07+08:00">2024-05-20</time>
+              <time title="创建时间：2024-05-20 13:50:07 / 修改时间：13:59:46" itemprop="dateCreated datePublished" datetime="2024-05-20T13:50:07+08:00">2024-05-20</time>
             </span>
 
           
@@ -185,7 +185,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="C-17-新特性"><a href="#C-17-新特性" class="headerlink" title="C++17 新特性"></a>C++17 新特性</h1><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/17">C++17 - cppreference.com</a></p>
+          <p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/17">C++17 - cppreference.com</a></p>
 <h2 id="New-language-features"><a href="#New-language-features" class="headerlink" title="New language features"></a>New language features</h2><h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><h4 id="结构化绑定"><a href="#结构化绑定" class="headerlink" title="结构化绑定"></a>结构化绑定</h4><p>首先先举一个例子，在leetcode刷题看题解经常会遇到这种写法。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[k , v] : mp) &#123;</span><br><span class="line">    <span class="keyword">if</span> (k == <span class="number">1</span>) &#123;<span class="comment">//获取值</span></span><br><span class="line">        v = <span class="number">1</span>;<span class="comment">//修改值</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -196,7 +196,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="built_in">getValue</span>();</span><br><span class="line"><span class="keyword">if</span> (a &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="comment">//to something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(a) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>c++17后。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="type">int</span> a = <span class="built_in">getValue</span>();a &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="comment">//to something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(<span class="type">int</span> a = <span class="built_in">getValue</span>();a) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="type">int</span> a = <span class="built_in">getValue</span>();a &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="comment">//to something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(<span class="type">int</span> a = <span class="built_in">getValue</span>();a) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="内联变量"><a href="#内联变量" class="headerlink" title="内联变量"></a>内联变量</h4><p> 在头文件里定义一个内联的变量或者对象，如果这个定义被多个编译单元使用，那么他们都指向同一个唯一的对象。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//header file</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">static</span> <span class="keyword">inline</span> std::string name = <span class="string">&quot;&quot;</span>; <span class="comment">// OK since C++17</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">inline</span> MyClass myGlobalObj; <span class="comment">// OK even if included/defined by multiple CPP files</span></span><br></pre></td></tr></table></figure>
@@ -448,7 +448,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">zuoyu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
@@ -474,7 +474,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
