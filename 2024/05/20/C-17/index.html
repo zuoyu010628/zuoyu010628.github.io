@@ -1,25 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
+  <meta charset="utf-8">
+  
+  
+  <title>C++17新特性 | ZuoBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="C++17 - cppreference.com New language featuresVariables结构化绑定首先先举一个例子，在leetcode刷题看题解经常会遇到这种写法。 1234567unordered_map&lt;int, int&gt; mp;for (auto &amp;[k , v] : mp) &#123;    if (k &#x3D;&#x3D; 1) &#123;&#x2F;&#x2F;获取值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++17新特性">
@@ -32,163 +18,85 @@
 <meta property="article:author" content="zuoyu">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://example.com/2024/05/20/C-17/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>C++17新特性 | ZuoBlog</title>
   
+    <link rel="alternate" href="/atom.xml" title="ZuoBlog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+  
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
 
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ZuoBlog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">�����ڵذ���˯�������ǴӺ������˹�</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
     </div>
   </div>
+</header>
 
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">ZuoBlog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">�����ڵذ���˯�������ǴӺ������˹�</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
+      <div class="outer">
+        <section id="main"><article id="post-C-17" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/20/C-17/" class="article-date">
+  <time class="dt-published" datetime="2024-05-20T05:50:07.000Z" itemprop="datePublished">2024-05-20</time>
+</a>
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
   </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
+    <h1 class="p-name article-title" itemprop="headline name">
+      C++17新特性
+    </h1>
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/20/C-17/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="zuoyu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZuoBlog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          C++17新特性
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-05-20 13:50:07 / 修改时间：13:59:46" itemprop="dateCreated datePublished" datetime="2024-05-20T13:50:07+08:00">2024-05-20</time>
-            </span>
-
-          
-
-        </div>
       </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="e-content article-entry" itemprop="articleBody">
       
         <p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/17">C++17 - cppreference.com</a></p>
 <h2 id="New-language-features"><a href="#New-language-features" class="headerlink" title="New language features"></a>New language features</h2><h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><h4 id="结构化绑定"><a href="#结构化绑定" class="headerlink" title="结构化绑定"></a>结构化绑定</h4><p>首先先举一个例子，在leetcode刷题看题解经常会遇到这种写法。</p>
@@ -335,183 +243,115 @@
 </li>
 </ul>
 
+      
     </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/20/C-17/" data-id="clwekrj6i0000ftpza5474tag" data-title="C++17新特性" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
 
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C++</a>
-          </div>
-
-        
-
-
-        
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#New-language-features"><span class="nav-number">1.</span> <span class="nav-text">New language features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">结构化绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if-switch-%E8%AF%AD%E5%8F%A5%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.2.</span> <span class="nav-text">if-switch 语句初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E8%81%94%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.3.</span> <span class="nav-text">内联变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#guaranteed-copy-elision"><span class="nav-number">1.1.4.</span> <span class="nav-text">guaranteed copy elision</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#temporary-materialization"><span class="nav-number">1.1.5.</span> <span class="nav-text">temporary materialization</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Templates"><span class="nav-number">1.2.</span> <span class="nav-text">Templates</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">折叠表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.2.2.</span> <span class="nav-text">构造函数模板推导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#non-type-template-parameters-declared-with-auto"><span class="nav-number">1.2.3.</span> <span class="nav-text">non-type template parameters declared with auto</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#class-template-argument-deduction-tuple-t-4-3-2-5"><span class="nav-number">1.2.4.</span> <span class="nav-text">class template argument deduction tuple t(4, 3, 2.5)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constexpr"><span class="nav-number">1.3.</span> <span class="nav-text">constexpr</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#constexpr-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">constexpr lambda表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#compile-time-if-constexpr"><span class="nav-number">1.3.2.</span> <span class="nav-text">compile-time if constexpr</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Namespaces"><span class="nav-number">1.4.</span> <span class="nav-text">Namespaces</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E7%9A%84%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%B5%8C%E5%A5%97%EF%BC%88simplified-nested-namespaces%EF%BC%89"><span class="nav-number">1.4.1.</span> <span class="nav-text">简化的命名空间嵌套（simplified nested namespaces）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#using-declaration-declaring-multiple-names"><span class="nav-number">1.4.2.</span> <span class="nav-text">using-declaration declaring multiple names</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#attribute-namespaces-don%E2%80%99t-have-to-repeat"><span class="nav-number">1.4.3.</span> <span class="nav-text">attribute namespaces don’t have to repeat</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#has-include%E9%A2%84%E5%A4%84%E7%90%86%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text">__has_include预处理表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9EAttribute"><span class="nav-number">1.6.</span> <span class="nav-text">新增Attribute</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fallthrough"><span class="nav-number">1.6.1.</span> <span class="nav-text">[[fallthrough]]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nodiscard"><span class="nav-number">1.6.2.</span> <span class="nav-text">[[nodiscard]]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#maybe-unused"><span class="nav-number">1.6.3.</span> <span class="nav-text">[[maybe_unused]]</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u8-character-literal"><span class="nav-number">1.7.</span> <span class="nav-text">u8 character literal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#made-noexcept-part-of-type-system"><span class="nav-number">1.8.</span> <span class="nav-text">made noexcept part of type system</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new-order-of-evaluation-rules"><span class="nav-number">1.9.</span> <span class="nav-text">new order of evaluation rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lambda%E9%80%9A%E8%BF%87-this%E6%8D%95%E8%8E%B7%E5%AF%B9%E8%B1%A1%E5%89%AF%E6%9C%AC%EF%BC%88lambda-capture-of-this%EF%BC%89"><span class="nav-number">1.10.</span> <span class="nav-text">lambda通过*this捕获对象副本（lambda capture of *this）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-library-features"><span class="nav-number">2.</span> <span class="nav-text">New library features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Utility-types"><span class="nav-number">2.1.</span> <span class="nav-text">Utility types</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#std-tuple"><span class="nav-number">2.1.1.</span> <span class="nav-text">std::tuple</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-any"><span class="nav-number">2.1.2.</span> <span class="nav-text">std::any</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-optional"><span class="nav-number">2.1.3.</span> <span class="nav-text">std::optional</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-management"><span class="nav-number">2.2.</span> <span class="nav-text">Memory management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#array-support-for-std-shared-ptr"><span class="nav-number">2.2.1.</span> <span class="nav-text">array support for std::shared_ptr</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compile-time-programming"><span class="nav-number">2.3.</span> <span class="nav-text">Compile-time programming</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithms"><span class="nav-number">2.4.</span> <span class="nav-text">Algorithms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterators-and-containers"><span class="nav-number">2.5.</span> <span class="nav-text">Iterators and containers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Numerics"><span class="nav-number">2.6.</span> <span class="nav-text">Numerics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Others"><span class="nav-number">2.7.</span> <span class="nav-text">Others</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#std-to-chars-std-from-chars"><span class="nav-number">2.7.1.</span> <span class="nav-text">std::to_chars&#x2F;std::from_chars</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">zuoyu</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">1</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">zuoyu</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
     </footer>
   </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
+    </div>
+  </div>
 
 
   
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a>
+    </div>
+  </div>
 
   
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
+    </div>
+  </div>
 
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/20/C-17/">C++17新特性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 zuoyu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
 </body>
 </html>
