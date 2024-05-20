@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>C++17新特性 | ZuoBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="C++17 新特性C++17 - cppreference.com New language featuresVariables结构化绑定首先先举一个例子，在leetcode刷题看题解经常会遇到这种写法。 1234567unordered_map&lt;int, int&gt; mp;for (auto &amp;[k , v] : mp) &#123;    if (k &#x3D;&#x3D; 1) &#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++17新特性">
+<meta property="og:url" content="http://example.com/2024/05/20/C-17/index.html">
+<meta property="og:site_name" content="ZuoBlog">
+<meta property="og:description" content="C++17 新特性C++17 - cppreference.com New language featuresVariables结构化绑定首先先举一个例子，在leetcode刷题看题解经常会遇到这种写法。 1234567unordered_map&lt;int, int&gt; mp;for (auto &amp;[k , v] : mp) &#123;    if (k &#x3D;&#x3D; 1) &#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-20T05:50:07.000Z">
+<meta property="article:modified_time" content="2024-05-20T05:53:30.041Z">
+<meta property="article:author" content="zuoyu">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="ZuoBlog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ZuoBlog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">�����ڵذ���˯�������ǴӺ������˹�</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-C-17" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/20/C-17/" class="article-date">
+  <time class="dt-published" datetime="2024-05-20T05:50:07.000Z" itemprop="datePublished">2024-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      C++17新特性
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="C-17-新特性"><a href="#C-17-新特性" class="headerlink" title="C++17 新特性"></a>C++17 新特性</h1><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/17">C++17 - cppreference.com</a></p>
+<h2 id="New-language-features"><a href="#New-language-features" class="headerlink" title="New language features"></a>New language features</h2><h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><h4 id="结构化绑定"><a href="#结构化绑定" class="headerlink" title="结构化绑定"></a>结构化绑定</h4><p>首先先举一个例子，在leetcode刷题看题解经常会遇到这种写法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;[k , v] : mp) &#123;</span><br><span class="line">    <span class="keyword">if</span> (k == <span class="number">1</span>) &#123;<span class="comment">//获取值</span></span><br><span class="line">        v = <span class="number">1</span>;<span class="comment">//修改值</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中的  <code>auto [k, v]</code>就是结构化绑定，通过结构化绑定，我们可以很方便地获取 <code>map</code>对应的值。</p>
+<p>除去 <code>map</code>之外，还可以应用于 <code>pair</code>,<code>tuple</code>，结构体和数组，如果加上引用，还可以修改对象的值。</p>
+<p>还有就是，可以实现自定义类的结构化绑定以及结构化绑定不能应用于constexpr（据说c++20可以），我不懂就简单提一下。</p>
+<h4 id="if-switch-语句初始化"><a href="#if-switch-语句初始化" class="headerlink" title="if-switch 语句初始化"></a>if-switch 语句初始化</h4><p>举个例子，c++17前，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="built_in">getValue</span>();</span><br><span class="line"><span class="keyword">if</span> (a &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="comment">//to something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(a) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>c++17后。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="type">int</span> a = <span class="built_in">getValue</span>();a &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="comment">//to something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(<span class="type">int</span> a = <span class="built_in">getValue</span>();a) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="内联变量"><a href="#内联变量" class="headerlink" title="内联变量"></a>内联变量</h4><p> 在头文件里定义一个内联的变量或者对象，如果这个定义被多个编译单元使用，那么他们都指向同一个唯一的对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//header file</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">static</span> <span class="keyword">inline</span> std::string name = <span class="string">&quot;&quot;</span>; <span class="comment">// OK since C++17</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">inline</span> MyClass myGlobalObj; <span class="comment">// OK even if included/defined by multiple CPP files</span></span><br></pre></td></tr></table></figure>
+
+<p>引入的原因，首先是c++中，不允许在类中初始化非const静态成员；</p>
+<blockquote>
+<p>因为静态成员是属于类，而不属于某个对象，如果在类中初始化，会导致每个对象都包含该静态成员。</p>
+</blockquote>
+<p>其次是如果在被多个cpp引用的头文件中定义类结构之外的变量会导致这些cpp中都定义了这个变量，导致重定义变量。</p>
+<p>关于内联就可以再写一篇文章，这就是学习c++让我感到痛苦的地方，平常你轻视的地方，却蕴含着三言两语难以说清楚的门道。</p>
+<h4 id="guaranteed-copy-elision"><a href="#guaranteed-copy-elision" class="headerlink" title="guaranteed copy elision"></a>guaranteed copy elision</h4><blockquote>
+<p>to-do</p>
+</blockquote>
+<h4 id="temporary-materialization"><a href="#temporary-materialization" class="headerlink" title="temporary materialization"></a>temporary materialization</h4><blockquote>
+<p> to-do</p>
+</blockquote>
+<h3 id="Templates"><a href="#Templates" class="headerlink" title="Templates"></a>Templates</h3><h4 id="折叠表达式"><a href="#折叠表达式" class="headerlink" title="折叠表达式"></a>折叠表达式</h4><blockquote>
+<p>to-do</p>
+</blockquote>
+<h4 id="构造函数模板推导"><a href="#构造函数模板推导" class="headerlink" title="构造函数模板推导"></a>构造函数模板推导</h4><p>在c++17之前，构造一个模板类对象需要指明其类型，而c++17就不需要指定类型，可以通过构造函数的初始值直接推导出类型。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector v = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; <span class="comment">// 推导为 vector&lt;int&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="non-type-template-parameters-declared-with-auto"><a href="#non-type-template-parameters-declared-with-auto" class="headerlink" title="non-type template parameters declared with auto"></a>non-type template parameters declared with auto</h4><blockquote>
+<p>to-do</p>
+</blockquote>
+<h4 id="class-template-argument-deduction-tuple-t-4-3-2-5"><a href="#class-template-argument-deduction-tuple-t-4-3-2-5" class="headerlink" title="class template argument deduction tuple t(4, 3, 2.5)"></a>class template argument deduction tuple t(4, 3, 2.5)</h4><blockquote>
+<p>to-do</p>
+</blockquote>
+<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><h4 id="constexpr-lambda表达式"><a href="#constexpr-lambda表达式" class="headerlink" title="constexpr lambda表达式"></a>constexpr lambda表达式</h4><h4 id="compile-time-if-constexpr"><a href="#compile-time-if-constexpr" class="headerlink" title="compile-time if constexpr"></a>compile-time if constexpr</h4><blockquote>
+<p>to-do</p>
+</blockquote>
+<h3 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h3><h4 id="简化的命名空间嵌套（simplified-nested-namespaces）"><a href="#简化的命名空间嵌套（simplified-nested-namespaces）" class="headerlink" title="简化的命名空间嵌套（simplified nested namespaces）"></a>简化的命名空间嵌套（simplified nested namespaces）</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> A &#123;</span><br><span class="line">    <span class="keyword">namespace</span> B &#123;</span><br><span class="line">        <span class="keyword">namespace</span> C &#123;</span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// c++17，更方便更舒适</span></span><br><span class="line"><span class="keyword">namespace</span> A::B::C &#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span></span>;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="using-declaration-declaring-multiple-names"><a href="#using-declaration-declaring-multiple-names" class="headerlink" title="using-declaration declaring multiple names"></a>using-declaration declaring multiple names</h4><h4 id="attribute-namespaces-don’t-have-to-repeat"><a href="#attribute-namespaces-don’t-have-to-repeat" class="headerlink" title="attribute namespaces don’t have to repeat"></a>attribute namespaces don’t have to repeat</h4><h3 id="has-include预处理表达式"><a href="#has-include预处理表达式" class="headerlink" title="__has_include预处理表达式"></a>__has_include预处理表达式</h3><p>用来判断是否有某个头文件，代码可能在不同编译器下工作，不同编译器的可用头文件有可能不同。</p>
+<h3 id="新增Attribute"><a href="#新增Attribute" class="headerlink" title="新增Attribute"></a>新增Attribute</h3><p>首先  <code>Attribute</code>是一个关键字，用于指定一个函数、变量、类、模板或类型 trait 应该具有的特殊行为。</p>
+<h4 id="fallthrough"><a href="#fallthrough" class="headerlink" title="[[fallthrough]]"></a>[[fallthrough]]</h4><p>通常在使用 switch 语句时，如果case 后没有加break，编译器就会发出警告信息，在case处理部分添加这个属性，用于消除这个警告信息，表示这部分逻辑本意如此。此外该属性只能用在 switch 语句中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (i) &#123;&#125;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        xxx; <span class="comment">// warning</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        xxx; </span><br><span class="line">        [[fallthrough]];<span class="comment">// 警告消除</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        xxx;</span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="nodiscard"><a href="#nodiscard" class="headerlink" title="[[nodiscard]]"></a>[[nodiscard]]</h4><p>被此属性修饰的函数，其返回值不应该被丢弃，如果被丢弃编译器就会发出警告信息；如果是修饰的枚举或者类，那么在对应函数返回该类型的时候也不应该丢弃结果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[[nodiscard]] <span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">F</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">func</span>(); <span class="comment">// warning 没有处理函数返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="maybe-unused"><a href="#maybe-unused" class="headerlink" title="[[maybe_unused]]"></a>[[maybe_unused]]</h4><p>通常如果声明了一个变量但是从来没有使用过，编译器就会发出警告信息，使用该属性之后，编译器就会认为是故意为之，从而不再发出警告。需要注意，这个声明不会影响编译器的优化逻辑，在编译优化阶段，无用的变量该干掉还是会被干掉的。</p>
+<h3 id="u8-character-literal"><a href="#u8-character-literal" class="headerlink" title="u8 character literal"></a>u8 character literal</h3><blockquote>
+<p>to-do</p>
+</blockquote>
+<h3 id="made-noexcept-part-of-type-system"><a href="#made-noexcept-part-of-type-system" class="headerlink" title="made noexcept part of type system"></a>made noexcept part of type system</h3><blockquote>
+<p>to-do</p>
+</blockquote>
+<h3 id="new-order-of-evaluation-rules"><a href="#new-order-of-evaluation-rules" class="headerlink" title="new order of evaluation rules"></a>new order of evaluation rules</h3><blockquote>
+<p>to-do</p>
+</blockquote>
+<h3 id="lambda通过-this捕获对象副本（lambda-capture-of-this）"><a href="#lambda通过-this捕获对象副本（lambda-capture-of-this）" class="headerlink" title="lambda通过*this捕获对象副本（lambda capture of *this）"></a>lambda通过*this捕获对象副本（lambda capture of *this）</h3><p>正常情况下，lambda捕获了this指针，如果this指向的对象析构了，而函数再被调用且访问了成员变量，就会有问题，结果往往是崩溃。</p>
+<p>这个新特性让你捕获*this，持有了对象的拷贝，从而避免了上述问题。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> f = [*<span class="keyword">this</span>] &#123; <span class="comment">// 这里</span></span><br><span class="line">            cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="built_in">f</span>();</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="New-library-features"><a href="#New-library-features" class="headerlink" title="New library features"></a>New library features</h2><h3 id="Utility-types"><a href="#Utility-types" class="headerlink" title="Utility types"></a>Utility types</h3><h4 id="std-tuple"><a href="#std-tuple" class="headerlink" title="std::tuple"></a>std::tuple</h4><ul>
+<li>std::apply</li>
+<li>std::make_from_tuple</li>
+<li>deduction guides</li>
+</ul>
+<h4 id="std-any"><a href="#std-any" class="headerlink" title="std::any"></a>std::any</h4><h4 id="std-optional"><a href="#std-optional" class="headerlink" title="std::optional"></a>std::optional</h4><p>见名知意，表示一个值</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/variant">std::variant</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/functional#Searchers">searchers</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/as_const">std::as_const</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/functional/not_fn">std::not_fn</a></li>
+</ul>
+<h3 id="Memory-management"><a href="#Memory-management" class="headerlink" title="Memory management"></a>Memory management</h3><ul>
+<li>uninitialized memory algorithms<ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/destroy_at">std::destroy_at</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/destroy">std::destroy</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/destroy_n">std::destroy_n</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/uninitialized_move">std::uninitialized_move</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/uninitialized_value_construct">std::uninitialized_value_construct</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/enable_shared_from_this/weak_from_this"><code>weak_from_this</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/memory_resource">std::pmr::memory_resource</a> and <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/polymorphic_allocator">std::polymorphic_allocator</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/c/aligned_alloc">std::aligned_alloc</a></li>
+<li>transparent <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/owner_less">std::owner_less</a></li>
+</ul>
+<h4 id="array-support-for-std-shared-ptr"><a href="#array-support-for-std-shared-ptr" class="headerlink" title="array support for std::shared_ptr"></a>array support for std::shared_ptr</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/memory/new/operator_new">allocation functions</a> with explicit alignment</li>
+</ul>
+<h3 id="Compile-time-programming"><a href="#Compile-time-programming" class="headerlink" title="Compile-time programming"></a>Compile-time programming</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/byte"><code>std::byte</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/conjunction">std::conjunction</a>&#x2F;<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/disjunction">std::disjunction</a>&#x2F;<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/negation">std::negation</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types">type trait</a> variable templates (<code>*xxx*_+v</code>)</li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/is_swappable">std::is_swappable</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/is_invocable"><code>std::is_invocable</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/is_aggregate"><code>std::is_aggregate</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/has_unique_object_representations">std::has_unique_object_representations</a></li>
+</ul>
+<h3 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/clamp">std::clamp</a></li>
+<li>parallel algorithms and <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/execution_policy_tag_t">execution policies</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/inclusive_scan">std::inclusive_scan</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/exclusive_scan">std::exclusive_scan</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/numeric/gcd">std::gcd</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/numeric/lcm">std::lcm</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/reduce">std::reduce</a></li>
+</ul>
+<h3 id="Iterators-and-containers"><a href="#Iterators-and-containers" class="headerlink" title="Iterators and containers"></a>Iterators and containers</h3><ul>
+<li>map&#x2F;set <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/extract"><code>extract</code></a> and map&#x2F;set <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/merge"><code>merge</code></a></li>
+<li>map&#x2F;unordered_map <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/try_emplace"><code>try_emplace</code></a> and <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/insert_or_assign"><code>insert_or_assign</code></a></li>
+<li>contiguous iterators (<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/named_req/ContiguousIterator"><em>LegacyContiguousIterator</em></a>)</li>
+<li>non-member <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/iterator/size">std::size</a>&#x2F;<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/iterator/empty">std::empty</a>&#x2F;<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/iterator/data">std::data</a></li>
+</ul>
+<h3 id="Numerics"><a href="#Numerics" class="headerlink" title="Numerics"></a>Numerics</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/numeric/special_functions">mathematical special functions</a></li>
+<li>3D <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/numeric/math/hypot">std::hypot</a></li>
+</ul>
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/thread/hardware_destructive_interference_size">cache line interface</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/launder">std::launder</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/error/uncaught_exception">std::uncaught_exceptions</a></p>
+</li>
+</ul>
+<h4 id="std-to-chars-std-from-chars"><a href="#std-to-chars-std-from-chars" class="headerlink" title="std::to_chars&#x2F;std::from_chars"></a>std::to_chars&#x2F;std::from_chars</h4><ul>
+<li><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/atomic/atomic/is_always_lock_free"><code>std::atomic::is_always_lock_free</code></a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/thread/scoped_lock"><code>std::scoped_lock</code></a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/chrono/c/timespec_get">std::timespec_get</a></p>
+</li>
+<li><p>rounding functions for <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/chrono/duration">std::chrono::duration</a> and <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/chrono/time_point">std::chrono::time_point</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/20/C-17/" data-id="clwejw3px0000m5pz79yr5gnr" data-title="C++17新特性" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/20/C-17/">C++17新特性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 zuoyu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
