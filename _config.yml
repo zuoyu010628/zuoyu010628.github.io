@@ -4,8 +4,8 @@
 
 # Site
 title: ZuoBlog
-subtitle: ''
-description: ''
+subtitle: We have slept on the floor, we have waded through the river
+description:
 keywords:
 author: zuoyu
 language: zh-CN
@@ -96,7 +96,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
