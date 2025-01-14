@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="c++11相比c++17就比较熟悉了，原因当然是实践的比较多，自然就熟悉了。本文还是介绍我比较熟悉和比较简单的特性，太过熟悉的，比如nullptr，我不会讲也没有讲的必要，全部特性参照C++11 - cppreference.com。 Core language featuresauto &amp; decltype auto：让编译器在编译期就推导出变量的类型。 很好用的关键字，但是不能滥用，否">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++11新特性">
+<meta property="og:url" content="http://example.com/2024/05/21/C-11/index.html">
+<meta property="og:site_name" content="ZuoBlog">
+<meta property="og:description" content="c++11相比c++17就比较熟悉了，原因当然是实践的比较多，自然就熟悉了。本文还是介绍我比较熟悉和比较简单的特性，太过熟悉的，比如nullptr，我不会讲也没有讲的必要，全部特性参照C++11 - cppreference.com。 Core language featuresauto &amp; decltype auto：让编译器在编译期就推导出变量的类型。 很好用的关键字，但是不能滥用，否">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-21T08:53:57.000Z">
+<meta property="article:modified_time" content="2024-09-10T15:34:50.876Z">
+<meta property="article:author" content="zuoyu">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="C++11">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>C++11新特性</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2024/06/27/websocket/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2024/05/20/C-17/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/05/21/C-11/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/05/21/C-11/&text=C++11新特性"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/05/21/C-11/&is_video=false&description=C++11新特性"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++11新特性&body=Check out this article: http://example.com/2024/05/21/C-11/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/05/21/C-11/&name=C++11新特性&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/05/21/C-11/&t=C++11新特性"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-language-features"><span class="toc-number">1.</span> <span class="toc-text">Core language features</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#auto-decltype"><span class="toc-number">1.1.</span> <span class="toc-text">auto &amp; decltype</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#default-delete-final-override-explicit"><span class="toc-number">1.2.</span> <span class="toc-text">default &amp; delete &amp; final &amp; override &amp; explicit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">委托构造函数 &amp; 继承构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80%EF%BC%88static-assert%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">静态断言（static_assert）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#enum-class"><span class="toc-number">1.5.</span> <span class="toc-text">enum class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thread-local"><span class="toc-number">1.6.</span> <span class="toc-text">thread_local</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attribute"><span class="toc-number">1.7.</span> <span class="toc-text">attribute</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96-list-initialization"><span class="toc-number">1.8.</span> <span class="toc-text">列表初始化(list initialization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constexpr"><span class="toc-number">1.9.</span> <span class="toc-text">constexpr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.10.</span> <span class="toc-text">lambda表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other"><span class="toc-number">2.</span> <span class="toc-text">Other</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        C++11新特性
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">zuoyu</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-05-21T08:53:57.000Z" class="dt-published" itemprop="datePublished">2024-05-21</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/C/" rel="tag">C++</a>, <a class="p-category" href="/tags/C-11/" rel="tag">C++11</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>c++11相比c++17就比较熟悉了，原因当然是实践的比较多，自然就熟悉了。本文还是介绍我比较熟悉和比较简单的特性，太过熟悉的，比如nullptr，我不会讲也没有讲的必要，全部特性参照<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/11">C++11 - cppreference.com</a>。</p>
+<h2 id="Core-language-features"><a href="#Core-language-features" class="headerlink" title="Core language features"></a>Core language features</h2><h3 id="auto-decltype"><a href="#auto-decltype" class="headerlink" title="auto &amp; decltype"></a>auto &amp; decltype</h3><ul>
+<li><p>auto：让编译器在编译期就推导出变量的类型。</p>
+<p>很好用的关键字，但是不能滥用，否则会影响代码可读性，比如int，double这种简单类型就不要使用，一些不关心其具体类型的变量（比如lambda表达式）或者复杂类型就使用auto。</p>
+</li>
+<li><p>decltype：编译器推导表达式的类型。</p>
+</li>
+</ul>
+<blockquote>
+<p>具体的推导规则看了就忘实在记不住。</p>
+</blockquote>
+<h3 id="default-delete-final-override-explicit"><a href="#default-delete-final-override-explicit" class="headerlink" title="default &amp; delete &amp; final &amp; override &amp; explicit"></a>default &amp; delete &amp; final &amp; override &amp; explicit</h3><ul>
+<li>default ： 使用默认的函数定义，只用用于特殊成员函数（构造，析构之类）。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">  <span class="built_in">A</span>() = <span class="keyword">default</span>;</span><br><span class="line">  <span class="type">int</span> a;</span><br><span class="line">  <span class="built_in">A</span>(<span class="type">int</span> i) &#123; a = i; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A a;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>delete ：如果没有定义特殊成员函数，编译器期就会生成默认的特殊成员函数，delete可以阻止这种行为。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//禁止对象的拷贝与赋值</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="built_in">A</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">const</span> A&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    A&amp; <span class="keyword">operator</span>=(<span class="type">const</span> A&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">int</span> i) &#123; a = i; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A a1;</span><br><span class="line">    A a2 = a1;  <span class="comment">// 错误，拷贝构造函数被禁用</span></span><br><span class="line">    A a3;</span><br><span class="line">    a3 = a1;  <span class="comment">// 错误，拷贝赋值操作符被禁用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>final ：用于指定虚函数不能被重写或者类不能被继承。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ChildOfBase</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">dontChangeMe</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">final</span> </span>&#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BadChildOfChild</span> : <span class="keyword">public</span> ChildOfBase &#123;</span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">dontChangeMe</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span></span>;  <span class="comment">//ERROR</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DontDeriveFromMe</span> <span class="keyword">final</span> &#123;</span><br><span class="line">   <span class="comment">// ...</span></span><br><span class="line"> &#125;;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">class</span> <span class="title class_">Failure</span> : <span class="keyword">public</span> DontDeriveFromMe &#123; <span class="comment">//ERROR</span></span><br><span class="line">   <span class="comment">// ...</span></span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>override：用于确保一个函数是虚函数且重写了基类的虚函数。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;base&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base&#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123; <span class="comment">// 确保func被重写</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;derived&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">fu</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123; <span class="comment">// error，基类没有fu()，不可以被重写</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>explicit：专门用来修饰构造函数，表示只能显示构造，不能被隐式转换。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">A</span><span class="params">(<span class="type">int</span> value)</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;value&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A a = <span class="number">1</span>; <span class="comment">// error，不可以隐式转换</span></span><br><span class="line">    <span class="function">A <span class="title">aa</span><span class="params">(<span class="number">2</span>)</span></span>; <span class="comment">// ok</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="委托构造函数-继承构造函数"><a href="#委托构造函数-继承构造函数" class="headerlink" title="委托构造函数 &amp; 继承构造函数"></a>委托构造函数 &amp; 继承构造函数</h3><ul>
+<li>委托构造函数：允许同一个类中的一个构造函数（委托构造函数）调用另一个构造函数（目标构造函数），即在委托构造函数的初始化列表调用目标构造函数，执行顺序是先目标构造函数再委托构造函数。委托构造函数可以减少代码重复，避免相同的构造逻辑写多次。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="built_in">A</span>()&#123;&#125;</span><br><span class="line">    <span class="built_in">A</span>(<span class="type">int</span> a) &#123; a_ = a; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">A</span>(<span class="type">int</span> a, <span class="type">int</span> b) : <span class="built_in">A</span>(a) &#123; b_ = b; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">A</span>(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c) : <span class="built_in">A</span>(a, b) &#123; c_ = c; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a_;</span><br><span class="line">    <span class="type">int</span> b_;</span><br><span class="line">    <span class="type">int</span> c_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>继承构造函数：允许派生类可以使用基类的构造函数。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">    <span class="built_in">Base</span>() &#123;&#125;</span><br><span class="line">    <span class="built_in">Base</span>(<span class="type">int</span> a) &#123; a_ = a; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Base</span>(<span class="type">int</span> a, <span class="type">int</span> b) : <span class="built_in">Base</span>(a) &#123; b_ = b; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Base</span>(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c) : <span class="built_in">Base</span>(a, b) &#123; c_ = c; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a_;</span><br><span class="line">    <span class="type">int</span> b_;</span><br><span class="line">    <span class="type">int</span> c_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Derived</span> : Base &#123;</span><br><span class="line">    <span class="keyword">using</span> Base::Base;<span class="comment">//继承构造函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">Derived <span class="title">a</span><span class="params">(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span></span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态断言（static-assert）"><a href="#静态断言（static-assert）" class="headerlink" title="静态断言（static_assert）"></a>静态断言（static_assert）</h3><p>c++11引入static_assert声明，用于在编译期间检查，如果第一个参数值为false，则打印message，编译失败。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">static_assert</span>(<span class="literal">true</span>/<span class="literal">false</span>, message);</span><br></pre></td></tr></table></figure>
+
+<h3 id="enum-class"><a href="#enum-class" class="headerlink" title="enum class"></a>enum class</h3><p>新增带作用域的枚举类型,普通的枚举可以自动转换为整型，且不同的枚举可以相互比较，以至于产生潜藏的bug，而带作用域的枚举就不会有这些问题。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">AColor</span> &#123;</span><br><span class="line">    kRed,</span><br><span class="line">    kGreen,</span><br><span class="line">    kBlue</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">enum class</span> <span class="title class_">BColor</span> &#123;</span><br><span class="line">    kWhite,</span><br><span class="line">    kBlack,</span><br><span class="line">    kYellow</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (AColor::kRed == BColor::kWhite) &#123; <span class="comment">// 编译失败</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;red == white&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以一定要使用带作用域的枚举。</p>
+<h3 id="thread-local"><a href="#thread-local" class="headerlink" title="thread_local"></a>thread_local</h3><p>顾名思义，线程本地，被<code>thread_local</code>修饰的变量具有线程周期，每一个线程都拥有其只拥有一个该变量的独立实例。</p>
+<h3 id="attribute"><a href="#attribute" class="headerlink" title="attribute"></a>attribute</h3><ul>
+<li><p>[[noreturn]]：表明一个函数一定不会返回，注意是不会返回，而不是没有返回值</p>
+</li>
+<li><p>[[carries_dependency]]：看不懂</p>
+<blockquote>
+<p>允许我们将dependency跨越函数进行传递，用于避免在弱一致性模型平台上产生不必要的内存栅栏导致代码效率降低。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="列表初始化-list-initialization"><a href="#列表初始化-list-initialization" class="headerlink" title="列表初始化(list initialization)"></a>列表初始化(list initialization)</h3><p>在变量名后加上初始化列表来进行对象的初始化</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a&#123;<span class="number">123</span>&#125;;</span><br><span class="line">std::string s&#123;<span class="string">&quot;test&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>std::initializer_list</strong>是实现列表初始化的关键，它可以接受任意长度的初始化列表，可以理解为存储特定类型的数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(std::initializer_list&lt;<span class="type">double</span>&gt; il)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">g</span><span class="params">(<span class="type">float</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">f</span>(&#123;<span class="number">1</span>, x, <span class="number">3</span>&#125;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">h</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">f</span>(&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>constexpr修饰的是真正的常量，它会在编译期间就会被计算出来，整个运行过程中都不可以被改变，constexpr可以用于修饰函数，这个函数的返回值会尽可能在编译期间被计算出来当作一个常量，但是如果编译期间此函数不能被计算出来，那它就会当作一个普通函数被处理</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="type">int</span> <span class="title">func</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">func</span>(i);<span class="comment">// 普通函数</span></span><br><span class="line">    <span class="built_in">func</span>(<span class="number">2</span>);<span class="comment">// 编译期间就会被计算出来</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>其中func是可以当作lambda表达式的名字，作为一个函数使用，capture是捕获列表，params是参数表，opt是函数选项(mutable之类)， ret是返回值类型，func_body是函数体。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> func = [capture] (params) opt -&gt; ret &#123; func_body; &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>lambda表达式允许捕获一定范围内的变量，但是不推荐默认捕获，明确捕获的变量</p>
+<ul>
+<li><p>[]不捕获任何变量</p>
+</li>
+<li><p>[&amp;]引用捕获，捕获外部作用域所有变量，在函数体内当作引用使用</p>
+</li>
+<li><p>[&#x3D;]值捕获，捕获外部作用域所有变量，在函数内内有个副本使用</p>
+</li>
+<li><p>[&#x3D;, &amp;a]值捕获外部作用域所有变量，按引用捕获a变量</p>
+</li>
+<li><p>[a]只值捕获a变量，不捕获其它变量</p>
+</li>
+<li><p>[this]捕获当前类中的this指针</p>
+</li>
+</ul>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>其他的如智能指针，左右值之类比较重要的，需要单独写一篇文章来介绍。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-language-features"><span class="toc-number">1.</span> <span class="toc-text">Core language features</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#auto-decltype"><span class="toc-number">1.1.</span> <span class="toc-text">auto &amp; decltype</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#default-delete-final-override-explicit"><span class="toc-number">1.2.</span> <span class="toc-text">default &amp; delete &amp; final &amp; override &amp; explicit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">委托构造函数 &amp; 继承构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%AD%E8%A8%80%EF%BC%88static-assert%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">静态断言（static_assert）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#enum-class"><span class="toc-number">1.5.</span> <span class="toc-text">enum class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thread-local"><span class="toc-number">1.6.</span> <span class="toc-text">thread_local</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attribute"><span class="toc-number">1.7.</span> <span class="toc-text">attribute</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96-list-initialization"><span class="toc-number">1.8.</span> <span class="toc-text">列表初始化(list initialization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constexpr"><span class="toc-number">1.9.</span> <span class="toc-text">constexpr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.10.</span> <span class="toc-text">lambda表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other"><span class="toc-number">2.</span> <span class="toc-text">Other</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/05/21/C-11/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/05/21/C-11/&text=C++11新特性"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/05/21/C-11/&is_video=false&description=C++11新特性"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++11新特性&body=Check out this article: http://example.com/2024/05/21/C-11/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/05/21/C-11/&title=C++11新特性"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/05/21/C-11/&name=C++11新特性&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/05/21/C-11/&t=C++11新特性"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    zuoyu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
